@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/welcole_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+  <!-- Relative -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical"
+        android:padding="28dp"
+        android:layout_alignParentBottom="true">>
+
+        <!-- Message de bienvenu -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienvenue sur l'App"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <!-- Marge entre les blocs -->
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+
+        <!-- Présentation de l'app -->
+
+        <!-- Marge entre les blocs -->
+
+        <TextView
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:text="Nous sommes heureux de vous presenter\nnotre application." />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+
+        <!-- Bouton login -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/BtnConnexion"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Connexion"
+            app:backgroundTint="#2F4EFF" />
+
+        <!-- Marge entre les blocs -->
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" />
+
+        <!-- Bouton inscription -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/BtnInscrire"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/cadre_background"
+            android:text="S'inscrire"
+            android:textColor="@color/black"
+            app:backgroundTint="#FFFEFF" />
+
+        <!-- Marge entre les blocs -->
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
+        <!-- Invité -->
+        <TextView
+            android:id="@+id/TxtInvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:text="Continuer comme un invité"
+            android:textColor="#35C2C1"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>
