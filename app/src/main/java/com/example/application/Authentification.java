@@ -6,6 +6,13 @@ import android.widget.Toast;
 public class Authentification {
     private static String admin = "admin";
     private static String adminMP = "123456";
+
+    /**
+     * Vérification des informations de connexion
+     * @param user
+     * @param pass
+     * @return
+     */
     public static boolean verificationInfoLogin(String user, String pass){
         if (user.equals("") || pass.equals("")) {
             return false;
