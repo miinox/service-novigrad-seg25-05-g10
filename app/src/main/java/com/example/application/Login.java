@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
@@ -31,6 +32,21 @@ public class Login extends AppCompatActivity {
             public void onClick(View view) {
 
                 goToPage(MainActivity.class);
+            }
+        });
+
+        btnSeConnecter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String utilisateur = txtEmail.getText().toString();
+                String pass = txtMp.getText().toString();
+                if (Authentification.verificationInfoLogin(utilisateur, pass)){
+                    goToPage(Verification.class);
+                    // RP
+
+                }else{
+                    Toast.makeText(Login.this,"Erreur verifier les informations", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
