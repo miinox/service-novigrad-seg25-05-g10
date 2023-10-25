@@ -1,5 +1,6 @@
 package com.example.application;
 
+import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
@@ -13,18 +14,19 @@ public class Authentification {
      * @param pass
      * @return
      */
-    public static boolean verificationInfoLogin(String user, String pass){
-        if (user.equals("") || pass.equals("")) {
-            return false;
-        } else {
-            //Boolean checkuserpass = DB.checkusernamepassword(user, pass);
-            if (user.equals(admin) || pass.equals(adminMP)){
+    public static boolean verificationInfoLogin(Context context, String user, String pass) {
+        DBHelper DB = new DBHelper(context);
+
+            Boolean checkuserpass = DB.checkusernamepassword(user, pass);
+            if (user.equals(admin) || pass.equals(adminMP)) {
                 return true;
 
-            }else {
+            } else {
                 return false;
             }
-        }
 
     }
+
+
+
 }

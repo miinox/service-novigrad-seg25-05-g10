@@ -19,8 +19,10 @@ public class Login extends AppCompatActivity {
     private TextView txtMpPerdu;
     private TextView txtCompteActif;
     private ImageView imgRetour;
+    DBHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DB = new DBHelper(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -36,11 +38,13 @@ public class Login extends AppCompatActivity {
         });
 
         btnSeConnecter.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 String utilisateur = txtEmail.getText().toString();
                 String pass = txtMp.getText().toString();
-                if (Authentification.verificationInfoLogin(utilisateur, pass)){
+
+                if (Authentification.verificationInfoLogin(Login.this, utilisateur, pass)){
                     goToPage(Verification.class);
                     // RP
 
