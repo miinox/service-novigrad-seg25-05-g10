@@ -26,6 +26,8 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        initEntrees(); // initialiser les entrées
         DB= new DBHelper(this);
         btnInscription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,9 +36,9 @@ public class Register extends AppCompatActivity {
                 String pass = txtMp.getText().toString();
                 String repass = txtConfirmeMp.getText().toString();
                 if (user.equals("")||pass.equals("")||repass.equals("")){
-                    Toast.makeText(Register.this, "completer tout le formulaire", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, "Erreur", Toast.LENGTH_SHORT).show();
                 }else{
-                    if (pass.equals(repass)){
+                    if (pass.equals(repass)){ 
                         boolean checkuser = DB.checkusername(user);
                         if (checkuser==false){
                             boolean emp = chkEmploye.isChecked();

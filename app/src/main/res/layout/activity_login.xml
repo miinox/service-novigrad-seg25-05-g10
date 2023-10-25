@@ -59,11 +59,11 @@
 
             <!-- Email-->
             <EditText
-                android:id="@+id/txtEmail"
+                android:id="@+id/txtUser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/done_icon"
-                android:hint="Email"
+                android:hint="Nom d'utilisateur"
                 android:inputType="textEmailAddress" />
 
             <!-- Mot de passe -->

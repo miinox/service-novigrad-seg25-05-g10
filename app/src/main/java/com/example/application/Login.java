@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
-    private EditText txtEmail;
+    private EditText txtUser;
     private EditText txtMp;
     private Button btnSeConnecter;
     private TextView txtMpPerdu;
@@ -22,7 +22,7 @@ public class Login extends AppCompatActivity {
     DBHelper DB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DB = new DBHelper(this);
+        DB = new DBHelper(this); // BASE DE DONNEES
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -41,16 +41,34 @@ public class Login extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                String utilisateur = txtEmail.getText().toString();
+                String utilisateur = txtUser.getText().toString();
                 String pass = txtMp.getText().toString();
 
-                if (Authentification.verificationInfoLogin(Login.this, utilisateur, pass)){
-                    goToPage(Verification.class);
-                    // RP
 
-                }else{
-                    Toast.makeText(Login.this,"Erreur verifier les informations", Toast.LENGTH_SHORT).show();
+                if(utilisateur.equals("")||pass.equals(""))
+                    Toast.makeText(Login.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                else {
+                    Boolean checkuserpass = DB.checkusernamepassword(utilisateur, pass);
+                    if (checkuserpass == true) {
+                        Toast.makeText(Login.this, "Sign in successfull", Toast.LENGTH_SHORT).show();
+                        goToPage(Verification.class);
+                    } else {
+                        Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+
+
+
+                    /*** A modifier après **/
+
+//                if (Authentification.verificationInfoLogin(Login.this, utilisateur, pass)){
+//                    goToPage(Verification.class);
+//                    // RP
+//
+//                }else{
+//                    Toast.makeText(Login.this,"Erreur verifier les informations", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
     }
@@ -60,8 +78,9 @@ public class Login extends AppCompatActivity {
      */
     private void initEntrees() {
         this.btnSeConnecter= (Button)findViewById(R.id.BtnSeConnecter);
-        this.txtEmail = (EditText)findViewById(R.id.TxtEmail);
-        this.txtMpPerdu = (TextView)findViewById(R.id.TxtMp);
+        this.txtUser = (EditText)findViewById(R.id.txtUser);
+        this.txtMp = (EditText)findViewById(R.id.txtMp);
+        this.txtMpPerdu = (TextView)findViewById(R.id.txtMpPerdu);
         this.txtCompteActif = (TextView)findViewById(R.id.TxtCompteActif);
         this.imgRetour = (ImageView)findViewById(R.id.ImgRetour);
     }
