@@ -93,7 +93,7 @@ public class DBHelper extends SQLiteOpenHelper {
             @SuppressLint("Range") Integer role = cursor.getInt(cursor.getColumnIndex("role"));
 
             // Créez un objet Profil avec les données récupérées
-            Profil profile = new Profil(username, password, email, role); // sauvegarder ces infos dans profil
+            Profil profile = new Profil(username, email, password, role); // sauvegarder ces infos dans profil
 
             // Fermez le curseur et la base de données
             cursor.close();

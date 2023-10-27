@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 public class Authentification {
-    private static String admin = "admin";
+    private static String admin = "admin";// creer un compte adminirtateur qui reste invarier
     private static String adminMP = "123456";
 
     Profil profil;
