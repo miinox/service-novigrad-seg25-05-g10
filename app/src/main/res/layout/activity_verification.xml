@@ -14,15 +14,16 @@
         android:padding="28dp">>
 
         <!-- Affichage nom d'utilisateur -->
+
+        <!-- Marge entre les blocs -->
         <TextView
+            android:id="@+id/afficheurRole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="Montserrat"
-            android:text="Elie Yaffa"
             android:textColor="#252525"
             android:textSize="15dp" />
 
-        <!-- Marge entre les blocs -->
         <View
             android:layout_width="wrap_content"
             android:layout_height="20dp" />

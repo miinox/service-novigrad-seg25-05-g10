@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 public class Login extends AppCompatActivity {
 
     private EditText txtUser;
@@ -20,55 +19,44 @@ public class Login extends AppCompatActivity {
     private TextView txtCompteActif;
     private ImageView imgRetour;
     DBHelper DB;
+
+    Profil profil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DB = new DBHelper(this); // BASE DE DONNEES
+        DB = new DBHelper(this); // Initialisation de la base de données
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        initEntrees(); // initialisation des entrées
+        initEntrees(); // Initialisation des entrées sur la page
 
-        // appuyer sur le retour
+        // Gestion du clic sur l'icône de retour
         imgRetour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 goToPage(MainActivity.class);
             }
         });
 
+        // Gestion du clic sur le bouton de connexion
         btnSeConnecter.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 String utilisateur = txtUser.getText().toString();
                 String pass = txtMp.getText().toString();
-
-
-                if(utilisateur.equals("")||pass.equals(""))
-                    Toast.makeText(Login.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                else {
-                    Boolean checkuserpass = DB.checkusernamepassword(utilisateur, pass);
-                    if (checkuserpass == true) {
-                        Toast.makeText(Login.this, "Sign in successfull", Toast.LENGTH_SHORT).show();
-                        goToPage(Verification.class);
-                    } else {
-                        Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                if(utilisateur.equals("") || pass.equals("")) {
+                    // L'utilisateur n'a rien saisi dans l'une des cases
+                    Toast.makeText(Login.this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Les champs ne sont pas vides, on vérifie les informations de connexion
+                    setProfil(Authentification.verificationInfoLogin(Login.this, DB, utilisateur, pass));
+                    if (profil != null) {
+                        // L'utilisateur s'est connecté avec succès
+                        Intent intent = new Intent(Login.this, Verification.class);
+                        intent.putExtra("profil", profil); // "profil" est la clé pour récupérer le profil
+                        startActivity(intent);
                     }
                 }
-
-
-
-
-                    /*** A modifier après **/
-
-//                if (Authentification.verificationInfoLogin(Login.this, utilisateur, pass)){
-//                    goToPage(Verification.class);
-//                    // RP
-//
-//                }else{
-//                    Toast.makeText(Login.this,"Erreur verifier les informations", Toast.LENGTH_SHORT).show();
-//                }
             }
         });
     }
@@ -77,20 +65,28 @@ public class Login extends AppCompatActivity {
      * Initialisation des entrées sur la page
      */
     private void initEntrees() {
-        this.btnSeConnecter= (Button)findViewById(R.id.BtnSeConnecter);
-        this.txtUser = (EditText)findViewById(R.id.txtUser);
-        this.txtMp = (EditText)findViewById(R.id.txtMp);
-        this.txtMpPerdu = (TextView)findViewById(R.id.txtMpPerdu);
-        this.txtCompteActif = (TextView)findViewById(R.id.TxtCompteActif);
-        this.imgRetour = (ImageView)findViewById(R.id.ImgRetour);
+        this.btnSeConnecter = (Button) findViewById(R.id.BtnSeConnecter);
+        this.txtUser = (EditText) findViewById(R.id.txtUser);
+        this.txtMp = (EditText) findViewById(R.id.txtMp);
+        this.txtMpPerdu = (TextView) findViewById(R.id.txtMpPerdu);
+        this.txtCompteActif = (TextView) findViewById(R.id.TxtCompteActif);
+        this.imgRetour = (ImageView) findViewById(R.id.ImgRetour);
     }
 
     /**
-     * Navition vers une page.
+     * Naviguer vers une autre page.
      * @param page
      */
     private void goToPage(Class page) {
         Intent intent = new Intent(this, page);
         startActivities(new Intent[]{intent});
+    }
+
+    /**
+     * Envoyer le profil en serialisation pour la page suivante
+     * @param profil
+     */
+    private void setProfil(Profil profil) {
+        this.profil = profil;
     }
 }
