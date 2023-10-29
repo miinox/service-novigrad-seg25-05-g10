@@ -79,7 +79,8 @@
             android:onClick="onClick"
             android:text="Continuer comme un invité"
             android:textColor="#35C2C1"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
